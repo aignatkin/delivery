@@ -1,10 +1,10 @@
 package ru.aignatkin.delivery.model;
 
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+//import javax.persistence.Id;
+//import javax.persistence.MappedSuperclass;
 
-@MappedSuperclass
+//@MappedSuperclass
 public class BaseEntity {
-    @Id
+//    @Id
     private String id;
 }

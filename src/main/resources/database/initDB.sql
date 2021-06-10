@@ -1,6 +1,4 @@
-/*
-DROP TABLE DeliveryPoints;
- */
+DROP TABLE IF EXISTS DeliveryPoints;
 
 CREATE TABLE IF NOT EXISTS DeliveryPoints (
                                 id_name varchar (20) primary key ,

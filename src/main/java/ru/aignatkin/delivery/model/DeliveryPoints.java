@@ -1,15 +1,15 @@
 package ru.aignatkin.delivery.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.Table;
+import javax.persistence.*;
 
-//@MappedSuperclass
 @Entity
 @Table(name = "delivery_points")
-public class DeliveryPoints extends BaseEntity {
-    @Column(name = "display_name")
+public class DeliveryPoints {
+    @Id
+    @Column(name = "name", length = 20)
+    public String name;
+
+    @Column(name = "display_name", length = 50, nullable = false)
     public String displayName;
 
     @Column(name = "partial_purchase")
@@ -30,4 +30,8 @@ public class DeliveryPoints extends BaseEntity {
     public void setPartialPurchase(String partialPurchase) {
         this.partialPurchase = partialPurchase;
     }
+
+    public void setName(String name) {this.name = name;}
+
+    public String getName() {return name;}
 }

@@ -1,4 +1,4 @@
-package ru.aignatkin.delivery;
+package ru.aignatkin.delivery.database;
 
 import ru.aignatkin.delivery.model.DeliveryPoints;
 
@@ -24,9 +24,9 @@ public class DatabaseHandler extends Configs {
         while (resultSet.next()) {
             DeliveryPoints deliveryPoints = new DeliveryPoints();
 
-            deliveryPoints.setId_name(resultSet.getString("id_name"));
+            deliveryPoints.setName(resultSet.getString("id_name"));
 
-            System.out.println(deliveryPoints.getId_name());
+            System.out.println(deliveryPoints.getName());
         }
     }
 }

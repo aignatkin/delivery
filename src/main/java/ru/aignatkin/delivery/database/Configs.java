@@ -1,4 +1,4 @@
-package ru.aignatkin.delivery;
+package ru.aignatkin.delivery.database;
 
 public class Configs {
     protected String dbHost = "localhost";
