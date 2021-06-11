@@ -19,7 +19,7 @@ public class DatabaseHandler extends Configs {
 
     public void read () throws ClassNotFoundException, SQLException {
         Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT * FROM DeliveryPoints");
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM delivery_points");
 
         while (resultSet.next()) {
             DeliveryPoints deliveryPoints = new DeliveryPoints();

@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Table(name = "delivery_points")
 public class DeliveryPoints {
     @Id
-    @Column(name = "name", length = 20)
+    @Column(name = "id_name", length = 20)
     public String name;
 
     @Column(name = "display_name", length = 50, nullable = false)

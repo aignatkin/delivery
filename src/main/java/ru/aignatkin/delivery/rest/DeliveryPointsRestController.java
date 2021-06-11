@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.aignatkin.delivery.model.DeliveryPoints;
 import ru.aignatkin.delivery.service.DeliveryPointsService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/delivery_points/")
 public class DeliveryPointsRestController {
@@ -21,15 +23,32 @@ public class DeliveryPointsRestController {
 
     @RequestMapping(value = "", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<DeliveryPoints> saveDeliveryPoints (@RequestBody DeliveryPoints deliveryPoints) {
-        HttpHeaders headers = new HttpHeaders();
-        System.out.println("Request! " + deliveryPoints.displayName);
+        System.out.println("Request to POST! " + deliveryPoints.displayName);
 
+        HttpHeaders headers = new HttpHeaders();
         if (deliveryPoints == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         this.deliveryPointsService.save(deliveryPoints);
 
         return new ResponseEntity<>(deliveryPoints, headers, HttpStatus.CREATED);
+    }
+
+    @RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<DeliveryPoints>> getAllDeliveryPoints () {
+        System.out.println("Request to GET ALL!");
+
+        HttpHeaders headers = new HttpHeaders();
+        List<DeliveryPoints> deliveryPoints = this.deliveryPointsService.getAll();
+        if (deliveryPoints.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        for(DeliveryPoints dp : deliveryPoints){
+            System.out.println(dp.getName());
+        }
+
+        return new ResponseEntity<>(deliveryPoints, HttpStatus.OK);
     }
 }
 

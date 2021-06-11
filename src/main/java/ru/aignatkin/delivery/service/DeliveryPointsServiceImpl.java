@@ -19,7 +19,6 @@ public class DeliveryPointsServiceImpl implements DeliveryPointsService {
 
     @Override
     public void save(DeliveryPoints deliveryPoints) {
-        System.out.println("Request! " + deliveryPoints.displayName);
         deliveryPointsRepository.save(deliveryPoints);
     }
 }
