@@ -1,6 +1,7 @@
 package ru.aignatkin.delivery.database;
 
-import ru.aignatkin.delivery.model.DeliveryPoints;
+import ru.aignatkin.delivery.dto.DeliveryPointDTO;
+import ru.aignatkin.delivery.model.DeliveryPoint;
 
 import java.sql.*;
 
@@ -22,11 +23,11 @@ public class DatabaseHandler extends Configs {
         ResultSet resultSet = statement.executeQuery("SELECT * FROM delivery_points");
 
         while (resultSet.next()) {
-            DeliveryPoints deliveryPoints = new DeliveryPoints();
+            DeliveryPoint deliveryPoint = new DeliveryPoint();
 
-            deliveryPoints.setName(resultSet.getString("id_name"));
+            //deliveryPoint.setName(resultSet.getString("id_name"));
 
-            System.out.println(deliveryPoints.getName());
+            //System.out.println(deliveryPoint.getName());
         }
     }
 }

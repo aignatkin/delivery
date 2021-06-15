@@ -1,0 +1,14 @@
+{
+  "deliveryPoints":[
+    {
+      "displayName": "Метро",
+      "partialPurchase": true,
+      "name": "10"
+    },
+    {
+      "displayName": "Ул. aвиамоторная",
+      "partialPurchase": false,
+      "name": "20"
+    }
+  ]
+}
