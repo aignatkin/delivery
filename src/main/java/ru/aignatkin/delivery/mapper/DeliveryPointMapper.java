@@ -5,7 +5,7 @@ import org.mapstruct.Mapping;
 import ru.aignatkin.delivery.dto.DeliveryPointDTO;
 import ru.aignatkin.delivery.model.DeliveryPoint;
 
-@Mapper(componentModel = "spring", uses = {DeliveryPointMapperNew.class})
+@Mapper(componentModel = "spring", uses = {DeliveryPointAfterMapping.class})
 public interface DeliveryPointMapper {
 
     @Mapping(expression ="java(deliveryPointDTO.getCoordinates()[0])", target = "coordinates_l")
