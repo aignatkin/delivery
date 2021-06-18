@@ -19,10 +19,10 @@ public class DeliveryPoint {
     public String active;
 
     @Column(name = "coordinates_l")
-    public Integer coordinates_l;
+    public Float coordinates_l;
 
     @Column(name = "coordinates_w")
-    public Integer coordinates_w;
+    public Float coordinates_w;
 
     @Column(name = "address_appartment")
     public String appartment;
@@ -57,11 +57,9 @@ public class DeliveryPoint {
         return partialPurchase;
     }
 
-    public Integer getCoordinates_l() {
-        return coordinates_l;
-    }
+    public Float getCoordinates_l() { return coordinates_l; }
 
-    public Integer getCoordinates_w() {
+    public Float getCoordinates_w() {
         return coordinates_w;
     }
 
@@ -93,13 +91,9 @@ public class DeliveryPoint {
         this.partialPurchase = partialPurchase;
     }
 
-    public void setCoordinates_l(Integer coordinates_l) {
-        this.coordinates_l = coordinates_l;
-    }
+    public void setCoordinates_l(Float coordinates_l) { this.coordinates_l = coordinates_l; }
 
-    public void setCoordinates_w(Integer coordinates_w) {
-        this.coordinates_w = coordinates_w;
-    }
+    public void setCoordinates_w(Float coordinates_w) { this.coordinates_w = coordinates_w; }
 
     public void setActive(String active) { this.active = active; }
 

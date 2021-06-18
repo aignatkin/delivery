@@ -1,11 +1,10 @@
 package ru.aignatkin.delivery.service;
 
-import ru.aignatkin.delivery.model.DeliveryPoint;
-
-import java.util.List;
+import ru.aignatkin.delivery.dto.DeliveryPointsDTO;
+import ru.aignatkin.delivery.exception.DeliveryPointException;
 
 public interface DeliveryPointsService {
-    List<DeliveryPoint> getAll ();
-    List<DeliveryPoint> getId (String name);
-    void save (DeliveryPoint deliveryPoint);
+    DeliveryPointsDTO getAll ();
+    DeliveryPointsDTO getId (String name) throws DeliveryPointException;
+    void save (DeliveryPointsDTO deliveryPointsDTO) throws DeliveryPointException;
 }
