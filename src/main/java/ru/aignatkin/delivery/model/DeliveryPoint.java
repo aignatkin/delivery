@@ -13,15 +13,15 @@ public class DeliveryPoint {
     public String displayName;
 
     @Column(name = "partial_purchase")
-    public String partialPurchase;
+    public boolean partialPurchase;
 
     @Column(name = "active")
-    public String active;
+    public boolean active;
 
-    @Column(name = "coordinates_l")
+    @Column(name = "coordinate_l")
     public Float coordinates_l;
 
-    @Column(name = "coordinates_w")
+    @Column(name = "coordinate_w")
     public Float coordinates_w;
 
     @Column(name = "address_appartment")
@@ -36,13 +36,13 @@ public class DeliveryPoint {
     @Column(name = "address_phone")
     public String phone;
 
-    @Column(name = "address_streetName")
+    @Column(name = "address_street_name")
     public String streetName;
 
-    @Column(name = "address_streetNumber")
+    @Column(name = "address_street_number")
     public String streetNumber;
 
-    @Column(name = "address_townName")
+    @Column(name = "address_town_name")
     public String townName;
 
     public String getName() {
@@ -53,9 +53,7 @@ public class DeliveryPoint {
         return displayName;
     }
 
-    public String getPartialPurchase() {
-        return partialPurchase;
-    }
+    public boolean getPartialPurchase() { return partialPurchase; }
 
     public Float getCoordinates_l() { return coordinates_l; }
 
@@ -63,7 +61,7 @@ public class DeliveryPoint {
         return coordinates_w;
     }
 
-    public String getActive() { return active; }
+    public boolean getActive() { return active; }
 
     public String getAppartment() { return appartment; }
 
@@ -87,15 +85,13 @@ public class DeliveryPoint {
         this.displayName = displayName;
     }
 
-    public void setPartialPurchase(String partialPurchase) {
-        this.partialPurchase = partialPurchase;
-    }
+    public void setPartialPurchase(boolean partialPurchase) { this.partialPurchase = partialPurchase; }
 
     public void setCoordinates_l(Float coordinates_l) { this.coordinates_l = coordinates_l; }
 
     public void setCoordinates_w(Float coordinates_w) { this.coordinates_w = coordinates_w; }
 
-    public void setActive(String active) { this.active = active; }
+    public void setActive(boolean active) { this.active = active; }
 
     public void setAppartment(String appartment) { this.appartment = appartment; }
 
