@@ -1,6 +1,10 @@
 package ru.aignatkin.delivery.service;
 
+import liquibase.pro.packaged.S;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.aignatkin.delivery.database.DatabaseDeliveryPointSearch;
+import ru.aignatkin.delivery.database.DatabaseHandler;
 import ru.aignatkin.delivery.dto.DeliveryPointDTO;
 import ru.aignatkin.delivery.dto.DeliveryPointsDTO;
 import ru.aignatkin.delivery.exception.DeliveryPointException;
@@ -9,8 +13,10 @@ import ru.aignatkin.delivery.model.DeliveryPoint;
 import ru.aignatkin.delivery.repository.DeliveryPointsRepository;
 
 import javax.persistence.EntityNotFoundException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Service
@@ -20,13 +26,16 @@ public class DeliveryPointsServiceImpl implements DeliveryPointsService {
     private final DeliveryPointsRepository deliveryPointsRepository;
     private final DeliveryPointMapper deliveryPointMapper;
 
+    @Autowired
+    public DatabaseDeliveryPointSearch databaseDeliveryPointSearch;
+
     public DeliveryPointsServiceImpl (DeliveryPointsRepository deliveryPointsRepository, DeliveryPointMapper deliveryPointMapper) {
         this.deliveryPointsRepository = deliveryPointsRepository;
         this.deliveryPointMapper = deliveryPointMapper;
     }
 
     @Override
-    public DeliveryPointsDTO getAll () {
+    public DeliveryPointsDTO getAll() {
         List<DeliveryPoint> deliveryPointList = this.deliveryPointsRepository.findAll();
 
         if (deliveryPointList.isEmpty()) {
@@ -46,7 +55,7 @@ public class DeliveryPointsServiceImpl implements DeliveryPointsService {
     }
 
     @Override
-    public DeliveryPointsDTO getId (String name) throws DeliveryPointException {
+    public DeliveryPointsDTO getId(String name) throws DeliveryPointException {
         DeliveryPointsDTO deliveryPointsDTO = new DeliveryPointsDTO();
         List<DeliveryPointDTO> deliveryPointDTOList = new ArrayList<>();
 
@@ -63,7 +72,7 @@ public class DeliveryPointsServiceImpl implements DeliveryPointsService {
     }
 
     @Override
-    public void save (DeliveryPointsDTO deliveryPointsDTO) throws DeliveryPointException {
+    public void save(DeliveryPointsDTO deliveryPointsDTO) throws DeliveryPointException {
         for (DeliveryPointDTO deliveryPointDTO : deliveryPointsDTO.getDeliveryPointDTO()) {
 
             if (deliveryPointDTO.getName().equals("")) {
@@ -75,5 +84,30 @@ public class DeliveryPointsServiceImpl implements DeliveryPointsService {
 
             this.deliveryPointsRepository.save(deliveryPoint);
         }
+    }
+
+    @Override
+    public DeliveryPointsDTO getNearest(float coordinate_w, float coordinate_l) throws DeliveryPointException {
+        DeliveryPointsDTO deliveryPointsDTO = new DeliveryPointsDTO();
+        List<DeliveryPointDTO> deliveryPointDTOList = new ArrayList<>();
+        List<String> searchResult = new ArrayList<>();
+
+        try {
+            searchResult = databaseDeliveryPointSearch.getNearest(coordinate_w, coordinate_l);
+
+            for(String result : searchResult) {
+                DeliveryPoint deliveryPoint = this.deliveryPointsRepository.getOne(result);
+                deliveryPointDTOList.add(deliveryPointMapper.toDTO(deliveryPoint));
+            }
+
+            deliveryPointsDTO.setDeliveryPoints(deliveryPointDTOList);
+
+            return deliveryPointsDTO;
+        } catch (ClassNotFoundException e) {
+            log.log(Level.SEVERE, "Exception: ", e.getMessage());
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
     }
 }

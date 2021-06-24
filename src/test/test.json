@@ -2,27 +2,27 @@
   "deliveryPoints": [
     {
       "coordinates": [
-        10.01,
-        20.01
+        55.650784,
+        37.579632
       ],
       "active": true,
       "address": {
         "appartment": "1",
-        "building": "1",
+        "building": "7",
         "country": "RU",
         "phone": "4 012 345 67 89",
-        "streetName": "Шоссе энтузиастов",
+        "streetName": "ул. Керченская",
         "streetNumber": "1",
         "townName": "Москва"
       },
-      "displayName": "Метро",
+      "displayName": "Дом",
       "partialPurchase": true,
-      "name": "1"
+      "name": "Дом"
     },
     {
       "coordinates": [
-        20.02,
-        30.02
+        55.689883,
+        37.601916
       ],
       "active": true,
       "address": {
@@ -30,52 +30,51 @@
         "building": "2",
         "country": "RU",
         "phone": "4 098 765 43 21",
-        "streetName": "Шоссе энтузиастов",
+        "streetName": "ул. Большая Черёмушкинская",
         "streetNumber": "2",
         "townName": "Москва"
       },
-      "displayName": "Ул. aвиамоторная",
+      "displayName": "РИО",
       "partialPurchase": false,
-      "name": "2"
+      "name": "РИО"
     },
     {
       "coordinates": [
-        20.02,
-        30.02
+        55.714663,
+        37.677380
       ],
       "active": true,
       "address": {
         "appartment": "2",
-        "building": "2",
+        "building": "38",
         "country": "RU",
         "phone": "4 098 765 43 21",
-        "streetName": "Шоссе энтузиастов",
+        "streetName": "ул. Шарикоподшипниковская",
         "streetNumber": "2",
         "townName": "Москва"
       },
-      "displayName": "Ул. aвиамоторная",
+      "displayName": "Офис",
       "partialPurchase": false,
-      "name": "3"
+      "name": "Офис"
     },
     {
       "coordinates": [
-        20.02,
-        30.02
+        55.618819,
+        37.766924
       ],
       "active": true,
       "address": {
         "appartment": "2",
-        "building": "2",
+        "building": "30Б",
         "country": "RU",
         "phone": "4 098 765 43 21",
-        "streetName": "Шоссе энтузиастов",
+        "streetName": "Ореховый бульвар",
         "streetNumber": "2",
         "townName": "Москва"
       },
-      "displayName": "Ул. aвиамоторная",
+      "displayName": "Гараж",
       "partialPurchase": false,
-      "name": "4"
+      "name": "Гараж"
     }
-    ]
+  ]
 }
-

@@ -8,8 +8,8 @@ import ru.aignatkin.delivery.model.DeliveryPoint;
 @Mapper(componentModel = "spring", uses = {DeliveryPointAfterMapping.class})
 public interface DeliveryPointMapper {
 
-    @Mapping(expression ="java(deliveryPointDTO.getCoordinates()[0])", target = "coordinates_l")
-    @Mapping(expression ="java(deliveryPointDTO.getCoordinates()[1])", target = "coordinates_w")
+    @Mapping(expression ="java(deliveryPointDTO.getCoordinates()[0])", target = "coordinates_w")
+    @Mapping(expression ="java(deliveryPointDTO.getCoordinates()[1])", target = "coordinates_l")
     @Mapping(source = "address", target = ".")
     DeliveryPoint fromDTO (DeliveryPointDTO deliveryPointDTO);
 

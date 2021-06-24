@@ -6,6 +6,8 @@ import ru.aignatkin.delivery.dto.DeliveryPointsDTO;
 import ru.aignatkin.delivery.exception.DeliveryPointException;
 import ru.aignatkin.delivery.mapper.DeliveryPointMapper;
 import ru.aignatkin.delivery.service.DeliveryPointsService;
+
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @RestController
@@ -28,7 +30,7 @@ public class DeliveryPointsRestController {
         try {
             deliveryPointsService.save(deliveryPointsDTO);
         } catch (DeliveryPointException ex) {
-            log.info("POST request incorrect data: " + ex);
+            log.log(Level.SEVERE, "Exception: ", ex.getMessage());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         log.info("POST request processed");
@@ -37,7 +39,7 @@ public class DeliveryPointsRestController {
         return new ResponseEntity<>(deliveryPointsDTO, headers, HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<DeliveryPointsDTO> getAllDeliveryPoints ()  {
         log.info("GET all request accepted");
 
@@ -63,11 +65,28 @@ public class DeliveryPointsRestController {
             return new ResponseEntity<>(deliveryPointsDTO, HttpStatus.OK);
 
         } catch (DeliveryPointException ex) {
-            log.info("GET request: " + ex);
-            //log.info("Delivery point " + id + " not found");
+            log.log(Level.SEVERE, "Exception: ", ex.getMessage());
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
 
+    @RequestMapping(value = "/nearest/{cw}/{cl}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<DeliveryPointsDTO> getNearestDeliveryPoints (@PathVariable String cw, @PathVariable String cl) {
+        try {
+            Float coordinate_w = new Float(cw);
+            Float coordinate_l = new Float(cl);
+
+            log.info("GET nearest delivery points to coordinates: " + coordinate_w + " " + coordinate_l);
+            try {
+                DeliveryPointsDTO deliveryPointsDTO = this.deliveryPointsService.getNearest(coordinate_w, coordinate_l);
+                return new ResponseEntity<>(deliveryPointsDTO, HttpStatus.OK);
+            } catch (DeliveryPointException ex) {
+                log.log(Level.SEVERE, "Exception: ", ex.getMessage());
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } catch (NumberFormatException ex){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }
 

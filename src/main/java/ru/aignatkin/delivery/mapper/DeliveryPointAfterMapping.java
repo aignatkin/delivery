@@ -12,7 +12,7 @@ public abstract class DeliveryPointAfterMapping {
     @AfterMapping
     protected void setCoordinate (DeliveryPoint deliveryPoint, @MappingTarget DeliveryPointDTO deliveryPointDTO) {
         deliveryPointDTO.setCoordinates(new Float[2]);
-        deliveryPointDTO.getCoordinates()[0] = deliveryPoint.getCoordinates_l();
-        deliveryPointDTO.getCoordinates()[1] = deliveryPoint.getCoordinates_w();
+        deliveryPointDTO.getCoordinates()[0] = deliveryPoint.getCoordinates_w();
+        deliveryPointDTO.getCoordinates()[1] = deliveryPoint.getCoordinates_l();
     }
 }
