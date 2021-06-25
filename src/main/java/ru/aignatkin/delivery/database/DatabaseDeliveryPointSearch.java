@@ -57,9 +57,15 @@ public class DatabaseDeliveryPointSearch extends DatabaseHandler {
         }
     }
 
+    //TODO: Как ты проверял, что это вообще работает?
+    //TODO: return DeliveryPointDTO
     public List<String> getNearest(float coordinate_w, float coordinate_l) throws ClassNotFoundException, SQLException, DeliveryPointException {
+        //TODO: почему если конфигурация неправильная, мы узнаем об этом только при вызове метода?
+        //TODO: зачем проверяем каждый раз при вызове метода?
         if (searchSquareSize.equals(0)) {
+            //TODO: а куда идет это исключение?
             new DeliveryPointException("Parameter \"" + parameterSearchStartSquareSize + "\" mast not to be 0 in a config file \"" + applicationPropertiesPath + "\"");
+            //TODO: null это значит точек рядом нет, или как это понимать?
             return null;
         }
 
@@ -88,13 +94,24 @@ public class DatabaseDeliveryPointSearch extends DatabaseHandler {
 
         // ищём квадрат с ребуемым количеством точек
         while (i < searchIterationNum) {
+            //TODO: вынести запрос в Repository. Сделать hibernate-like.
             sqlWhere = String.format("(coordinate_l BETWEEN " + (coordinate_l - searchSquareSize - i * searchSizingStep) + " AND " + (coordinate_l + searchSquareSize + i * searchSizingStep) + ") AND " +
                     "(coordinate_w BETWEEN " + (coordinate_w - searchSquareSize - i * searchSizingStep) + " AND " + (coordinate_w + searchSquareSize + i * searchSizingStep) + ")");
-            sqlQuery = "SELECT COUNT(*) AS rowcount FROM delivery_points WHERE " + sqlWhere;
+            sqlQuery = "SELECT * AS rowcount FROM delivery_points WHERE " + sqlWhere + "limit 3";
 
             connection.prepareStatement(sqlQuery, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             //System.out.println(sqlQuery);
             resultSet = statement.executeQuery(sqlQuery);
+            Map<DeliveryPointDTO, List<DeliveryPointDTO>> neighbourds;
+            List<DeliveryPointDTO> allPoints;
+            for (DeliveryPointDTO point: allPoints) {
+                List<DeliveryPointDTO> neighboursList = calculateNeighbours(point, neighbourdsCount);
+                neighbourds.put(point, neighboursList);
+            }
+
+            neighbourds.get(deliveryPoint);
+
+
 
             resultSet.next();
             rowsCount = resultSet.getInt("rowcount");
@@ -120,7 +137,18 @@ public class DatabaseDeliveryPointSearch extends DatabaseHandler {
 
             // сортируем и формируем ответ
             i = 0;
-            deliveryPointBufferList.sort(Comparator.comparing(DeliveryPointBuffer -> DeliveryPointBuffer.getDistance()));
+            deliveryPointBufferList.sort(
+                    Comparator.comparing(DeliveryPointBuffer -> DeliveryPointBuffer.getDistance())
+            );
+
+            //JMH
+
+            TreeMap
+            TreeSet
+
+
+
+            //TODO: можно сделать проще, через стримы, например
             for(DeliveryPointBuffer deliveryPointBuffer : deliveryPointBufferList) {
                 findedRows.add(deliveryPointBuffer.getName());
                 i++;

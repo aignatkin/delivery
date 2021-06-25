@@ -9,6 +9,7 @@ import ru.aignatkin.delivery.model.DeliveryPoint;
 @Mapper(componentModel = "spring")
 public abstract class DeliveryPointAfterMapping {
 
+    //TODO: зачем нужен after mapping
     @AfterMapping
     protected void setCoordinate (DeliveryPoint deliveryPoint, @MappingTarget DeliveryPointDTO deliveryPointDTO) {
         deliveryPointDTO.setCoordinates(new Float[2]);

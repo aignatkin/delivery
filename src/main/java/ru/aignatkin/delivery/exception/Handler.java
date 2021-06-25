@@ -4,6 +4,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.logging.Logger;
 
+//TODO: это работает?
 public class Handler {
     private static Logger LOGGER = (Logger) LoggerFactory.getLogger(Handler.class);
 

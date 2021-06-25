@@ -30,6 +30,7 @@ public class DeliveryPointsRestController {
         try {
             deliveryPointsService.save(deliveryPointsDTO);
         } catch (DeliveryPointException ex) {
+            //SEVERE это когда вообще ничо не работет, здесь можно ERROR вполне
             log.log(Level.SEVERE, "Exception: ", ex.getMessage());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

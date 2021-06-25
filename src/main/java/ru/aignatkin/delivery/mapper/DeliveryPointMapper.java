@@ -15,4 +15,7 @@ public interface DeliveryPointMapper {
 
     @Mapping(source = ".", target = "address")
     DeliveryPointDTO toDTO (DeliveryPoint deliveryPoint);
+
+
+
 }

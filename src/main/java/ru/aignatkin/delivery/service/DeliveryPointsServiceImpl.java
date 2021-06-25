@@ -106,6 +106,8 @@ public class DeliveryPointsServiceImpl implements DeliveryPointsService {
         } catch (ClassNotFoundException e) {
             log.log(Level.SEVERE, "Exception: ", e.getMessage());
         } catch (SQLException throwables) {
+            //TODO: и куда он это выведет?
+            //TODO: org.apache.commons.lang.exception.ExceptionUtils.getStackTrace(Throwable)
             throwables.printStackTrace();
         }
         return null;
